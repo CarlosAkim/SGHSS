@@ -1,5 +1,6 @@
 package com.ProjetoBackend.sghss.model;
 
+import com.ProjetoBackend.sghss.enums.StatusConsulta;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,7 +15,9 @@ public class Consulta {
     private long id;
 
     private LocalDateTime dataHora;
-    private String status;
+
+    @Enumerated(EnumType.STRING)
+    private StatusConsulta status;
 
     @ManyToOne
     @JoinColumn(name = "paciente_id", nullable = false)

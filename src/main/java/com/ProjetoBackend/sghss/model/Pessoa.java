@@ -1,5 +1,6 @@
 package com.ProjetoBackend.sghss.model;
 
+import com.ProjetoBackend.sghss.enums.TipoUsuario;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -29,5 +30,7 @@ public abstract class Pessoa {
 
     private boolean ativo;
 
+    @Enumerated(EnumType.STRING)
+    private TipoUsuario usuario;
 
 }
