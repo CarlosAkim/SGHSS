@@ -2,8 +2,10 @@ package com.ProjetoBackend.sghss.controller;
 
 import com.ProjetoBackend.sghss.model.Paciente;
 import com.ProjetoBackend.sghss.repository.PacienteRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,27 +29,35 @@ public class PacienteController {
     }
 
     @PostMapping
-    public Paciente criar(@RequestBody Paciente paciente){
-        return pacienteRepository.save(paciente);
+    public ResponseEntity<Paciente> criar(@Valid @RequestBody Paciente paciente){
+        return ResponseEntity.ok(pacienteRepository.save(paciente));
     }
 
     @PutMapping("/{id}")
-    public Object atualizar(@PathVariable Long id, @RequestBody Paciente novoPaciente){
-        Paciente atualizado = novoPaciente;
+    public ResponseEntity<Paciente> atualizar(@PathVariable Long id, @RequestBody Paciente novoPaciente) {
         return pacienteRepository.findById(id)
                 .map(paciente -> {
-                    paciente.setNome(atualizado.getNome());
-                    paciente.setEndereco(atualizado.getEndereco());
-                    paciente.setCpf(atualizado.getCpf());
-                    paciente.setAtivo(atualizado.isAtivo());
-                    paciente.setEmail(atualizado.getEmail());
-                    paciente.setSolicitacaoConsulta(atualizado.getSolicitacaoConsulta());
-                    paciente.setDataNascimento(atualizado.getDataNascimento());
-                    paciente.setTelefone(atualizado.getTelefone());
-                    paciente.setSenhaHash(atualizado.getSenhaHash());
-                    paciente.setUsuario(atualizado.getUsuario());
+                    paciente.setNome(novoPaciente.getNome());
+                    paciente.setEndereco(novoPaciente.getEndereco());
+                    paciente.setCpf(novoPaciente.getCpf());
+                    paciente.setAtivo(novoPaciente.isAtivo());
+                    paciente.setEmail(novoPaciente.getEmail());
+                    paciente.setSolicitacaoConsulta(novoPaciente.getSolicitacaoConsulta());
+                    paciente.setDataNascimento(novoPaciente.getDataNascimento());
+                    paciente.setTelefone(novoPaciente.getTelefone());
+                    paciente.setSenhaHash(novoPaciente.getSenhaHash());
+                    paciente.setUsuario(novoPaciente.getUsuario());
                     return ResponseEntity.ok(pacienteRepository.save(paciente));
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id){
+        if(pacienteRepository.existsById(id)){
+            pacienteRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 }
