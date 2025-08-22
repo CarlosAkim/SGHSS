@@ -26,7 +26,8 @@ public class Consulta {
 
     @ManyToOne
     @JoinColumn(name = "profissional_id", nullable = false)
-    private ProfissionalSaude profissionalSaude;
+    private ProfissionalSaude profissional;
+
 
 
 }
