@@ -14,13 +14,19 @@ public class Prontuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String descricao;
-    private String anotacao;
     private LocalDate dataRegistro;
+
+    private String observacoes;
 
     @ManyToOne
     @JoinColumn(name = "paciente_id", nullable = false)
     private Paciente paciente;
 
+    @ManyToOne
+    @JoinColumn(name = "profissional_id", nullable = false)
+    public ProfissionalSaude profissionalSaude;
 
+    @ManyToOne
+    @JoinColumn(name = "consulta_id", nullable = false)
+    public Consulta consulta;
 }

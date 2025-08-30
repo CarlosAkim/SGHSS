@@ -2,7 +2,6 @@ package com.ProjetoBackend.sghss.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 
@@ -19,7 +18,11 @@ public class Prescricao {
     private String medicamento;
     private String dosagem;
     private String instrucoes;
-    private LocalDate dataEmissao;
+    private LocalDate dataPrescicao;
+
+    @ManyToOne
+    @JoinColumn(name = "paciente_id", nullable = false)
+    private Paciente paciente;
 
     @ManyToOne
     @JoinColumn(name = "profissional_id",  nullable = false)
