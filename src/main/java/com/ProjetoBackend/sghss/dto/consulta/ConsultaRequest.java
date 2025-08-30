@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 public class ConsultaRequest {
     private LocalDateTime dataHora;
-    private StatusConsulta consulta;
+    private StatusConsulta status;
     private Long pacienteId;
     private Long profissionalId;
 }
