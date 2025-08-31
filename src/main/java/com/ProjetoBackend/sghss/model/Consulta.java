@@ -3,6 +3,8 @@ package com.ProjetoBackend.sghss.model;
 import com.ProjetoBackend.sghss.enums.StatusConsulta;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
